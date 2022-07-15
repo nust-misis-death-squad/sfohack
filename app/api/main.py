@@ -33,9 +33,15 @@ async def hello_world(request: Request):
 
 @app.get('/task1', response_model=FirstTask)
 async def task1(request: Request):
+    """
+    Шаблонная обработка запроса для первой задачи
+    """
     return {'answer': True, 'error_cell_number': 1, 'recommended_error_cell_content': [], 'coordinates_license': [], 'coordinates_producer': []}
 
 
 @app.get('/task2', response_model=SecondTask)
 async def task2(request: Request):
+    """
+    Шаблонная обработка запроса для второй задачи
+    """
     return {}
