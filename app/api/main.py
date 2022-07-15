@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
-from .models import HelloWorld
+from .models import HelloWorld, FirstTask, SecondTask
 from ..core.settings import Settings
 
 app = FastAPI(title=Settings().project_name, version=Settings().version, description=Settings().fast_api_description)
@@ -29,3 +29,13 @@ async def hello_world(request: Request):
     Заглушка для демонстрации работы сервера
     """
     return {'Hello': 'World', "your ip": request.client.host}
+
+
+@app.get('/task1', response_model=FirstTask)
+async def task1(request: Request):
+    return {'answer': True, 'error_cell_number': 1, 'recommended_error_cell_content': [], 'coordinates_license': [], 'coordinates_producer': []}
+
+
+@app.get('/task2', response_model=SecondTask)
+async def task2(request: Request):
+    return {}
