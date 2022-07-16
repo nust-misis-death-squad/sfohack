@@ -4,7 +4,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import { store } from './app/store/store';
+import "antd/dist/antd.min.css";
+import { store } from "./app/store/store";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -18,5 +19,3 @@ root.render(
 );
 
 reportWebVitals();
-
-
