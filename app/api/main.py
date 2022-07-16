@@ -1,3 +1,5 @@
+import random
+
 from fastapi import FastAPI, Request, Body
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
@@ -43,12 +45,13 @@ async def task1(id: str = Body(), product_name: str = Body(), group: str = Body(
         product_name: str
         group: str
         reglament: str
-        code: int
+        code: str
     }
     """
+    tru = random.randint(0,1)
     #get_task1_prediction(id=id, product_name=product_name, group=group, regalment=reglament, code=code)
     return {
-            'answer': True,
+            'answer': True if tru else False,
             'error_cell_number': r.randint(2, 4
                                            ),
             'recommended_error_cell_content': ['example1', 'example2', 'example3', 'exmaple4', 'example5'],
