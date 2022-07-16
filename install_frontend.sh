@@ -1,3 +1,7 @@
 rm -rf /var/www/html
-cp -r frontend/ /var/www/html
-systemctl restart nginx.service
+cd frontend/
+node -v
+npm install
+npm run build
+sudo cp -r build/ /var/www/html
+sudo systemctl restart nginx.service

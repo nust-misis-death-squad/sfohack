@@ -3,7 +3,7 @@
 ## Утилиты
 `./setup.sh` - создание .venv и установка зависимостей  
 `./start.sh` - запуск сервера  
-`{sudo} bash install_frontend` - загрузка фронтенда в `/var/www/html/`
+`./install_frontend` - загрузка фронтенда в `/var/www/html/`
 
 ## Зависимости
 ```python
