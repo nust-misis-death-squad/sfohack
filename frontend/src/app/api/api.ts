@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export interface ChartData {
+  name: string;
+  number: number;
+}
+
 export interface CreateTask {
   id: string;
   product_name: string;
@@ -14,6 +19,7 @@ export interface Task1Results {
   coordinates_producer: number[][];
   error_cell_number: number;
   recommended_error_cell_content: string[];
+  table: ChartData[];
 }
 
 export const api = createApi({

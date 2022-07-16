@@ -168,7 +168,7 @@ export default function GroupPredictionResultsPage({}) {
           marginTop: 30,
         }}
       >
-        <PlotComponent points={[]} />
+        <PlotComponent chartData={state.results.table} />
         <MapComponent
           coordinates_license={state.results.coordinates_license}
           coordinates_producer={state.results.coordinates_producer}
