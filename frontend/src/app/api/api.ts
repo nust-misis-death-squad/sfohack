@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface CreateTask {
-  id: number;
+  id: string;
   product_name: string;
   group: string;
   reglament: string;
-  code: number;
+  code: string;
 }
 
 export interface Task1Results {

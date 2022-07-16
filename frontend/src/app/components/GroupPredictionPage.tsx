@@ -7,11 +7,11 @@ import { ROUTER_CONFIG } from "../../router";
 import { useCreateTask1Mutation } from "../api/api";
 
 export interface Item {
-  id: number;
+  id: string;
   product_name: string;
   group: string;
   reglament: string;
-  code: number;
+  code: string;
 }
 
 interface EditableCellProps {
@@ -66,11 +66,11 @@ export default function GroupPredictionPage() {
   const [createTask, { data: results, isSuccess }] = useCreateTask1Mutation();
   const formik = useFormik({
     initialValues: {
-      code: 0,
+      code: "",
       product_name: "",
       reglament: "",
       group: "",
-      id: 0,
+      id: "",
     },
     onSubmit: (values) => createTask(values),
   });

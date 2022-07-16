@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components/macro";
 import { Task1Results } from "../api/api";
 import { ROUTER_CONFIG } from "../../router";
+import MapComponent from "./MapComponent";
+import PlotComponent from "./PlotComponent";
 
 interface Item {
   id: string;
@@ -19,8 +21,8 @@ const renderCell = (textOfCell: string, rowData: Item, index: number) => {
     if (textOfCell) {
       return (
         <div style={{ color: "red" }}>
-          {textOfCell.split(" ").map((text) => (
-            <div>{text}</div>
+          {textOfCell.split(" ").map((text, index) => (
+            <div key={index}>{text}</div>
           ))}
         </div>
       );
@@ -33,6 +35,7 @@ const renderCell = (textOfCell: string, rowData: Item, index: number) => {
 
 const columns: ColumnsType<Item> = [
   {
+    key: "id",
     title: "Идентификатор",
     dataIndex: "id",
     width: "20%",
@@ -44,6 +47,7 @@ const columns: ColumnsType<Item> = [
     },
   },
   {
+    key: "product_name",
     title: "Общее наименование продукта",
     dataIndex: "product_name",
     width: "20%",
@@ -55,18 +59,21 @@ const columns: ColumnsType<Item> = [
     },
   },
   {
+    key: "reglament",
     title: "Технические регламенты",
     dataIndex: "reglament",
     width: "20%",
     render: renderCell,
   },
   {
+    key: "group",
     title: "Группа продукции",
     dataIndex: "group",
     width: "20%",
     render: renderCell,
   },
   {
+    key: "code",
     title: "Коды",
     dataIndex: "code",
     width: "20%",
@@ -76,7 +83,6 @@ const columns: ColumnsType<Item> = [
   ...col,
   onCell: (record: Item) => ({
     record,
-    dataIndex: col.dataIndex,
     title: col.title,
   }),
 }));
@@ -92,6 +98,8 @@ export default function GroupPredictionResultsPage({}) {
   const onGoBack = () => push(ROUTER_CONFIG.MAIN_PAGE.getPath());
 
   const state = location.state as PathState;
+
+  console.log(state.results);
 
   const getResultsRow = (results: Task1Results): Item => {
     if (results.error_cell_number !== null) {
@@ -139,7 +147,7 @@ export default function GroupPredictionResultsPage({}) {
       <TitleHolder>
         <ArrowLeftOutlined
           onClick={onGoBack}
-          style={{ fontSize: 20, marginTop: 25, marginRight:25 }}
+          style={{ fontSize: 20, marginTop: 25, marginRight: 25 }}
         />
         <Title>
           Предсказание группы, товарной номенклатуры и технического регламента
@@ -153,6 +161,19 @@ export default function GroupPredictionResultsPage({}) {
         columns={columns}
         pagination={false}
       />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: 30,
+        }}
+      >
+        <PlotComponent points={[]} />
+        <MapComponent
+          coordinates_license={state.results.coordinates_license}
+          coordinates_producer={state.results.coordinates_producer}
+        />
+      </div>
     </Container>
   );
 }
