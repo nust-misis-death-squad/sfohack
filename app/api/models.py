@@ -12,6 +12,7 @@ class FirstTask(BaseModel):
     recommended_error_cell_content: list
     coordinates_license: list
     coordinates_producer: list
+    table: list
 
 
 class SecondTask(BaseModel):
