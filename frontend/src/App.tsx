@@ -1,10 +1,12 @@
 import React from "react";
+import GroupPredictionPage from "./app/components/GroupPredictionPage";
+import Layout from "./app/components/Layout";
 
 function App() {
   return (
-    <div>
-      <header>app</header>
-    </div>
+    <Layout>
+      <GroupPredictionPage />
+    </Layout>
   );
 }
 
