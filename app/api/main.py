@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Body
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 import random as r
@@ -32,12 +32,20 @@ async def hello_world(request: Request):
     return {'Hello': 'World', "your ip": request.client.host}
 
 
-@app.get('/task1', response_model=FirstTask)
-async def task1(request: Request):
+@app.post('/task1', response_model=FirstTask)
+async def task1(id: int = Body(), product_name: str = Body(), group: str = Body(), reglament: str = Body(),code: int = Body()):
     """
     Шаблонная обработка запроса для первой задачи
     координаты в списке в формате: (lat,lon)
+    request{
+        id: int
+        product_name: str
+        group: str
+        reglament: str
+        code: int
+    }
     """
+    #get_task1_prediction(id=id, product_name=product_name, group=group, regalment=reglament, code=code)
     return {
             'answer': True,
             'error_cell_number': r.randint(0, 2),
