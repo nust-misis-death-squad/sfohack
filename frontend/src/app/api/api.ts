@@ -8,11 +8,19 @@ export interface CreateTask {
   code: number;
 }
 
+export interface Task1Results {
+  answer: boolean;
+  coordinates_license: number[][];
+  coordinates_producer: number[][];
+  error_cell_number: number;
+  recommended_error_cell_content: string[];
+}
+
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "https://nustmisisdeathsquad.ru:8080" }),
   endpoints: (build) => ({
-    createTask1: build.mutation<void, CreateTask>({
+    createTask1: build.mutation<Task1Results, CreateTask>({
       query: (body) => ({
         url: `task1`,
         method: "POST",

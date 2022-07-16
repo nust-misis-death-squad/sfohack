@@ -1,11 +1,11 @@
 import React from "react";
-import GroupPredictionPage from "./app/components/GroupPredictionPage";
 import Layout from "./app/components/Layout";
+import AppRouter from "./router";
 
 function App() {
   return (
     <Layout>
-      <GroupPredictionPage />
+      <AppRouter />
     </Layout>
   );
 }

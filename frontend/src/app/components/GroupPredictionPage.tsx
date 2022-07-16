@@ -1,10 +1,12 @@
 import { Button, Input, Table } from "antd";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components/macro";
+import { ROUTER_CONFIG } from "../../router";
 import { useCreateTask1Mutation } from "../api/api";
 
-interface Item {
+export interface Item {
   id: number;
   product_name: string;
   group: string;
@@ -22,8 +24,8 @@ interface EditableCellProps {
 
 const columns = [
   {
-    title: "код",
-    dataIndex: "code",
+    title: "Идентификатор",
+    dataIndex: "id",
     width: "20%",
   },
   {
@@ -41,6 +43,11 @@ const columns = [
     dataIndex: "group",
     width: "20%",
   },
+  {
+    title: "Коды",
+    dataIndex: "code",
+    width: "20%",
+  },
 ].map((col) => ({
   ...col,
   onCell: (record: Item) => ({
@@ -55,7 +62,8 @@ interface EditableRowProps {
 }
 
 export default function GroupPredictionPage() {
-  const [createTask] = useCreateTask1Mutation();
+  const { push } = useHistory();
+  const [createTask, { data: results, isSuccess }] = useCreateTask1Mutation();
   const formik = useFormik({
     initialValues: {
       code: 0,
@@ -90,6 +98,18 @@ export default function GroupPredictionPage() {
       cell: EditableCell,
     },
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      push(
+        ROUTER_CONFIG.RESULTS_PAGE.getPath({ id: formik.values.id.toString() }),
+        {
+          item: formik.values,
+          results: results,
+        }
+      );
+    }
+  }, [isSuccess, results]);
 
   return (
     <Container>
