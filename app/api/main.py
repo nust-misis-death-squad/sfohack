@@ -33,7 +33,7 @@ async def hello_world(request: Request):
 
 
 @app.post('/task1', response_model=FirstTask)
-async def task1(id: str = Body(), product_name: str = Body(), group: str = Body(), reglament: str = Body(),code: int = Body()):
+async def task1(id: str = Body(), product_name: str = Body(), group: str = Body(), reglament: str = Body(),code: str = Body()):
     """
     Шаблонная обработка запроса для первой задачи
     координаты в списке в формате: (lat,lon)
