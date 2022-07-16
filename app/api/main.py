@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
+import random as r
 
 from .models import HelloWorld, FirstTask, SecondTask
 from ..core.settings import Settings
@@ -35,8 +36,15 @@ async def hello_world(request: Request):
 async def task1(request: Request):
     """
     Шаблонная обработка запроса для первой задачи
+    координаты в списке в формате: (lat,lon)
     """
-    return {'answer': True, 'error_cell_number': 1, 'recommended_error_cell_content': [], 'coordinates_license': [], 'coordinates_producer': []}
+    return {
+            'answer': True,
+            'error_cell_number': r.randint(0, 2),
+            'recommended_error_cell_content': ['example1', 'example2', 'example3', 'exmaple4', 'example5'],
+            'coordinates_license': [(56.77005856718443, 22.02264736553036),(44.197625296391564, 42.9702011633056),(53.29908272879874, 83.79197060138002),(41.79670883697144, 44.79688727757298),(31.48775934034713, 34.44416836467772)],
+            'coordinates_producer': [(42.357131468976334, -83.16547798305959),(49.30288019074644, 14.149568843273835),(39.00801330712202, 125.75348066276186),(43.13589915968698, 74.56228395233046),(15.883683994918764, 7.958523720893803)]
+            }
 
 
 @app.get('/task2', response_model=SecondTask)
@@ -44,4 +52,14 @@ async def task2(request: Request):
     """
     Шаблонная обработка запроса для второй задачи
     """
-    return {}
+    return {
+        'recommendation_groups': ['group1', 'group2', 'group3', 'group4', 'group5'],
+        'recommendation_reglament': ['reg1', 'reg2', 'reg3', 'reg4', 'reg5'],
+        'recommendation_code': ['code1', 'code2', 'code3', 'code4', 'code5'],
+        'coordinates_license': [(56.77005856718443, 22.02264736553036), (44.197625296391564, 42.9702011633056),
+                                (53.29908272879874, 83.79197060138002), (41.79670883697144, 44.79688727757298),
+                                (31.48775934034713, 34.44416836467772)],
+        'coordinates_producer': [(42.357131468976334, -83.16547798305959), (49.30288019074644, 14.149568843273835),
+                                 (39.00801330712202, 125.75348066276186), (43.13589915968698, 74.56228395233046),
+                                 (15.883683994918764, 7.958523720893803)]
+    }
