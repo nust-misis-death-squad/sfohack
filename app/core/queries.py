@@ -3,14 +3,15 @@ from sqlalchemy import MetaData, Column, Table, ForeignKey
 from sqlalchemy import create_engine, select, delete, insert
 from random import randint
 
+"""
 engine = create_engine('postgresql+psycopg2://deathsquad:misis1488@localhost:5432/deathsquad?client_encoding=utf8')
 metadata = MetaData(bind=engine)
 try:
-    conn = engine.connect()
+   conn = engine.connect()
 except:
     print('could not connect to database')
-
-applicant = Table('applicant',metadata,
+"""
+applicant = Table('applicant',
                   Column('id')
                   )
 manufacturer = Table()
