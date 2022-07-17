@@ -143,7 +143,7 @@ export default function Task1Page() {
             pagination={false}
           />
           {/* я встретил баг с таблицей и вместо того, чтоб его фиксить - нарисовал ещё одну таблицу рядом. Наслаждайтесь.d */}
-          <table style={{ width: "100%" }}>
+          <table style={{ width: "100%", minWidth: 546 }}>
             <tbody>
               <tr>
                 {columns.map((col) => (
