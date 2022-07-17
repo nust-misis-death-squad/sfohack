@@ -10,14 +10,14 @@ try:
    conn = engine.connect()
 except:
     print('could not connect to database')
-"""
+
 applicant = Table('applicant',
                   Column('id')
                   )
 manufacturer = Table()
 product = Table()
 
-
+"""
 def get_cords_by_id():
     pass
 
