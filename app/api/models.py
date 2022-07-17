@@ -17,7 +17,7 @@ class FirstTask(BaseModel):
 
 class SecondTask(BaseModel):
     recommendation_groups: list
-    recommendations_reglament: list
-    recommendations_code: list
+    recommendation_reglament: list
+    recommendation_code: list
     coordinates_license: list
     coordinates_producer: list
