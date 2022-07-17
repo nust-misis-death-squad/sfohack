@@ -1,3 +1,4 @@
+"""
 import pickle as pkl
 import pandas as pd
 import numpy as np
@@ -97,6 +98,6 @@ def inference_task2(product_name, title_embs, group_embs, short_data):
     predcited_reglament = short_data.loc[ge.iloc[idxs].index.values].tech_reg.values
 
     return predcited_reglament, predicted_group, predicted_tnved
-
+"""
 def get_suggestions(data: str) -> list:
     return ['example0', 'example1', 'example2', 'example3', 'example4']
