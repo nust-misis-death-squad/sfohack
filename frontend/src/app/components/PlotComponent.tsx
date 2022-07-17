@@ -39,7 +39,6 @@ ChartJS.register(
 );
 
 export default function Plot({ chartData }: Props) {
-  console.log(chartData);
   const labels = chartData.map((data) => data.name);
 
   const data = {

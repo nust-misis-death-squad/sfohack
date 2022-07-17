@@ -5,12 +5,17 @@ export interface ChartData {
   number: number;
 }
 
-export interface CreateTask {
+export interface CreateTask1 {
   id: string;
   product_name: string;
   group: string;
   reglament: string;
   code: string;
+}
+
+export interface CreateTask2 {
+  id: string;
+  product_name: string;
 }
 
 export interface Task1Results {
@@ -22,13 +27,28 @@ export interface Task1Results {
   table: ChartData[];
 }
 
+export interface Task2Results {
+  recommendation_groups: string[];
+  recommendation_reglament: string[];
+  recommendation_code: string[];
+  coordinates_license: number[][];
+  coordinates_producer: number[][];
+}
+
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "https://nustmisisdeathsquad.ru:8080" }),
   endpoints: (build) => ({
-    createTask1: build.mutation<Task1Results, CreateTask>({
+    createTask1: build.mutation<Task1Results, CreateTask1>({
       query: (body) => ({
         url: `task1`,
+        method: "POST",
+        body,
+      }),
+    }),
+    createTask2: build.mutation<Task2Results, CreateTask2>({
+      query: (body) => ({
+        url: `task2`,
         method: "POST",
         body,
       }),
@@ -36,4 +56,4 @@ export const api = createApi({
   }),
 });
 
-export const { useCreateTask1Mutation } = api;
+export const { useCreateTask1Mutation, useCreateTask2Mutation } = api;

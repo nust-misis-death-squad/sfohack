@@ -92,10 +92,10 @@ interface PathState {
   results: Task1Results;
 }
 
-export default function GroupPredictionResultsPage({}) {
+export default function ResultsPage({}) {
   const { location, push } = useHistory();
 
-  const onGoBack = () => push(ROUTER_CONFIG.MAIN_PAGE.getPath());
+  const onGoBack = () => push(ROUTER_CONFIG.TASK1_PAGE.getPath());
 
   const state = location.state as PathState;
 
