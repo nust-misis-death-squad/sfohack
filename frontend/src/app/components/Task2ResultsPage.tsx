@@ -1,9 +1,8 @@
 import { Table } from "antd";
-import { ColumnsType } from "antd/lib/table";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components/macro";
-import { Task1Results, Task2Results } from "../api/api";
+import { Task2Results } from "../api/api";
 import { ROUTER_CONFIG } from "../../router";
 import MapComponent from "./MapComponent";
 import PlotComponent from "./PlotComponent";
@@ -70,7 +69,7 @@ interface PathState {
   results: Task2Results;
 }
 
-export default function Task2ResultsPage({}) {
+export default function Task2ResultsPage() {
   const { location, push } = useHistory();
 
   const onGoBack = () => push(ROUTER_CONFIG.TASK2_PAGE.getPath());
@@ -115,7 +114,7 @@ export default function Task2ResultsPage({}) {
           marginTop: 30,
         }}
       >
-        {/* <PlotComponent chartData={state.results.table} />*/}
+        <PlotComponent chartData={state.results.table} />
         <MapComponent
           coordinates_license={state.results.coordinates_license}
           coordinates_producer={state.results.coordinates_producer}

@@ -33,6 +33,7 @@ export interface Task2Results {
   recommendation_code: string[];
   coordinates_license: number[][];
   coordinates_producer: number[][];
+  table: ChartData[];
 }
 
 export const api = createApi({
