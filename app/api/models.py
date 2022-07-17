@@ -21,3 +21,4 @@ class SecondTask(BaseModel):
     recommendation_code: list
     coordinates_license: list
     coordinates_producer: list
+    table: list
