@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components/macro";
 import { ROUTER_CONFIG } from "../../router";
 import { useCreateTask2Mutation } from "../api/api";
-import {  createTask2Form } from "./schema";
+import { createTask2Form } from "./schema";
 
 export interface Item {
   id: string;
@@ -49,7 +49,6 @@ export default function Task2page() {
   const { push } = useHistory();
 
   const onGoBack = () => push(ROUTER_CONFIG.MAIN_PAGE.getPath());
-
 
   const [createTask2, { data: results, isSuccess }] = useCreateTask2Mutation();
   const formik = useFormik({
