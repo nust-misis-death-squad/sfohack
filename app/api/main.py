@@ -62,7 +62,7 @@ async def task1(id: str = Body(), product_name: str = Body(), group: str = Body(
 
 
 @app.post('/task2', response_model=SecondTask)
-async def task2(id: int = Body(), product_name: str = Body()):
+async def task2(id: str = Body(), product_name: str = Body()):
     """
     Шаблонная обработка запроса для второй задачи
     """
