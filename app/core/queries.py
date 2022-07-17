@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, Boolean, BigInteger, Text, Time, SmallInteger, and_
+from sqlalchemy import Integer, Text, Float
 from sqlalchemy import MetaData, Column, Table, ForeignKey
 from sqlalchemy import create_engine, select, delete, insert
 from random import randint
@@ -11,15 +11,34 @@ try:
 except:
     print('could not connect to database')
 
-applicant = Table('applicant',
-                  Column('id')
+production = Table('production',metadata,
+                  Column('id',Integer(),primary_key=True),
+                  Column('number', Text()),
+                  Column('TN_Codes', Text()),
+                  Column('group', Text()),
+                  Column('general_name', Text()),
+                  Column('laboratory', Text()),
+                  Column('applicant_id', Integer(), ForeignKey('applicant.id')),
+                  Column('manufacturer_id', Integer(), ForeignKey('manufacturer.id'))
                   )
-manufacturer = Table()
-product = Table()
+manufacturer = Table('manufacturer',metadata,
+                     Column('id',Integer(),primary_key=True),
+                     Column('name', Text()),
+                     Column('address', Text()),
+                     Column('lat', Float()),
+                     Column('lon', Float())
+                     )
+applicant = Table('applicant',metadata,
+                     Column('id',Integer(),primary_key=True),
+                     Column('name', Text()),
+                     Column('address', Text()),
+                     Column('lat', Float()),
+                     Column('lon', Float())
+                     )
 
-"""
 def get_cords_by_id():
     pass
+"""
 
 def get_table() -> list:
     table = []

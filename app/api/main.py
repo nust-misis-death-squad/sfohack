@@ -1,6 +1,4 @@
-import random
-
-from fastapi import FastAPI, Request, Body
+from fastapi import FastAPI, Request, Body, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 import random as r
@@ -8,6 +6,7 @@ import random as r
 from .models import HelloWorld, FirstTask, SecondTask
 from ..core.settings import Settings
 from ..core.queries import get_table
+from ..core.inferences import get_suggestions, inference_task1, inference_task2
 
 app = FastAPI(title=Settings().project_name, version=Settings().version, description=Settings().fast_api_description)
 
@@ -48,8 +47,7 @@ async def task1(id: str = Body(), product_name: str = Body(), group: str = Body(
         code: str
     }
     """
-    tru = random.randint(0,1)
-    #get_task1_prediction(id=id, product_name=product_name, group=group, regalment=reglament, code=code)
+    tru = inference_task1(product_name, code, reglament, group)
     return FirstTask(
             answer=True if tru else False,
             error_cell_number=r.randint(2, 4),
@@ -77,3 +75,14 @@ async def task2(id: str = Body(), product_name: str = Body()):
                                  (15.883683994918764, 7.958523720893803)],
         table=get_table()
     )
+
+
+@app.websocket('/search')
+async def search(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        data = await websocket.receive_text()
+        suggestions = get_suggestions(data)
+        for suggestion in suggestions:
+            await websocket.send_text(suggestion)
+
