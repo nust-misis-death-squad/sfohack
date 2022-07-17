@@ -6,7 +6,7 @@ import random as r
 from .models import HelloWorld, FirstTask, SecondTask
 from ..core.settings import Settings
 from ..core.queries import get_table
-from ..core.inferences import get_suggestions, inference_task1, inference_task2
+from ..core.inferences import get_suggestions#, inference_task1, inference_task2
 
 app = FastAPI(title=Settings().project_name, version=Settings().version, description=Settings().fast_api_description)
 
