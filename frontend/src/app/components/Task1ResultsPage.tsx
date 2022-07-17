@@ -147,7 +147,7 @@ export default function ResultsPage({}) {
       <TitleHolder>
         <ArrowLeftOutlined
           onClick={onGoBack}
-          style={{ fontSize: 20, marginTop: 25, marginRight: 25 }}
+          style={{ fontSize: 20, margin: "auto 10px" }}
         />
         <Title>
           Предсказание группы, товарной номенклатуры и технического регламента

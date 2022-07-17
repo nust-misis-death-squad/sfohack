@@ -104,14 +104,11 @@ export default function Task2page() {
       <TitleHolder>
         <ArrowLeftOutlined
           onClick={onGoBack}
-          style={{ fontSize: 20, marginTop: 25, marginRight: 25 }}
+          style={{ fontSize: 20, margin: "auto 10px" }}
         />
-        <Title>
-          Предсказание группы, товарной номенклатуры и технического регламента
-          продукции
-        </Title>
+        <Title>Оценка правильности заполнения данных продукции</Title>
       </TitleHolder>
-      <GrayText>Заполните строку данных, либо загрузите таблицу</GrayText>
+      <GrayText>Заполните строку данных</GrayText>
       <form onSubmit={formik.handleSubmit}>
         <div style={{ backgroundColor: "white" }}>
           <Table
@@ -155,11 +152,15 @@ export default function Task2page() {
 
 const Container = styled.div``;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+  margin-top: 0;
+  margin-bottom: 0;
+`;
 
 const GrayText = styled.span`
   color: gray;
   font-size: 24px;
+  margin-bottom: 10px;
 `;
 
 const TitleHolder = styled.div`
