@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import joblib
 import torch
+import torch.nn as nn
+from transformers import AutoTokenizer, AutoModel
+from sklearn.metrics.pairwise import cosine_similarity
 
 with open("product_name_2_product_tensor.pkl", "rb") as f:
     title_embs = pkl.load(f)
@@ -58,9 +61,42 @@ def inference_task1(name, tnved, regl, group):
     return model.predict(merged_emb)
 
 
-def inference_task2():
-    pass
 
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased", truncation=True)
+model = AutoModel.from_pretrained("bert-base-multilingual-cased").to("cpu")
+
+group_embs = pd.read_csv("production_groups_clear.csv", index_col=0)
+title_embs = pd.read_csv("production_names_clear.csv", index_col=0)
+short_data = pd.read_csv("simple_dataset_clear.csv", index_col=0).reset_index(drop=True)
+
+
+def inference_task2(product_name, title_embs, group_embs, short_data):
+    def top_k(a, k):
+        idx = np.argpartition(a, -k)[-k:]
+        idx_test = np.argpartition(a, -k)[0]
+        return idx, a[idx]
+
+    def BERT_encode(text, model, tokenizer):
+        t = tokenizer(text, padding=True, truncation=True, return_tensors='pt')
+        with torch.no_grad():
+            model_output = model(**{k: torch.tensor(v).to(model.device) for k, v in t.items()})
+
+        embeddings = model_output.last_hidden_state[:, 0, :]
+        embeddings = torch.nn.functional.normalize(embeddings)
+        return embeddings
+
+    target_embedding = BERT_encode([product_name], model, tokenizer).cpu().numpy()
+
+    ge = title_embs
+
+    idxs, arr = top_k(cosine_similarity(target_embedding, ge.values)[0], 6)
+    predicted_title = short_data.loc[ge.iloc[idxs].index.values].full_title.values
+    predicted_group = short_data.loc[ge.iloc[idxs].index.values].group.values
+    predicted_tnved = short_data.loc[ge.iloc[idxs].index.values].tnved.values
+    predcited_reglament = short_data.loc[ge.iloc[idxs].index.values].tech_reg.values
+
+    return predcited_reglament, predicted_group, predicted_tnved
 
 def get_suggestions(data: str) -> list:
     return ['example0', 'example1', 'example2', 'example3', 'example4']
